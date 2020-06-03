@@ -1,6 +1,8 @@
 import 'package:card/screens/singleProductItemScreen.dart';
 import 'package:flutter/material.dart';
 
+import 'screens/productOverviewScreen.dart';
+
 void main() {
   runApp(MyApp());
 }
@@ -10,7 +12,10 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: "Card Design",
-      home: SingleProductItemScreen(),
+      home: ProductOverviewScreen(),
+      routes: {
+        SingleProductItemScreen.routeName: (ctx) => SingleProductItemScreen(),
+      },
     );
   }
 }

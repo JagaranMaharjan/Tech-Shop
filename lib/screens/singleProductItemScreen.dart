@@ -12,6 +12,7 @@ import 'package:flutter/material.dart';
 import 'file:///D:/Courses/shop_app/card/lib/widgets/productItemsDetail/listTileWithTrailing.dart';
 
 class SingleProductItemScreen extends StatelessWidget {
+  static const String routeName = "singleProductItemScreen";
   @override
   Widget build(BuildContext context) {
     return SafeArea(
