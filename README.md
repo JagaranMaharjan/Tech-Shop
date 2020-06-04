@@ -1,4 +1,4 @@
-# card
+# E-Tech Shop
 
 A new Flutter application.
 

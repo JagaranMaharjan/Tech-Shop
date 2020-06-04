@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 class DisplayProductPrice extends StatelessWidget {
   final double productPrice;
   DisplayProductPrice({this.productPrice});
+
   @override
   Widget build(BuildContext context) {
     return Positioned(
@@ -14,7 +15,7 @@ class DisplayProductPrice extends StatelessWidget {
         height: 40,
         color: Colors.black12,
         child: Text(
-          "Rs. : $productPrice",
+          "Rs. : ${productPrice.toInt()}",
           textAlign: TextAlign.center,
           style: TextStyle(
             color: Colors.red,

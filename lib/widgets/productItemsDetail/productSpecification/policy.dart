@@ -77,8 +77,8 @@ class _PolicyState extends State<Policy> {
                       ),
                       Container(
                         constraints: BoxConstraints(
-                          maxHeight: 55,
-                          minHeight: 50,
+                          maxHeight: 90,
+                          minHeight: 90,
                           maxWidth: double.infinity,
                           minWidth: double.infinity,
                         ),
@@ -133,8 +133,8 @@ class _PolicyState extends State<Policy> {
                       ),
                       Container(
                         constraints: BoxConstraints(
-                          maxHeight: 70,
-                          minHeight: 70,
+                          maxHeight: 50,
+                          minHeight: 50,
                           maxWidth: double.infinity,
                           minWidth: double.infinity,
                         ),
