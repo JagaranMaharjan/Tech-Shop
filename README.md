@@ -1,4 +1,4 @@
-# E-Tech Shop
+# Tech Shop
 
 A new Flutter application.
 

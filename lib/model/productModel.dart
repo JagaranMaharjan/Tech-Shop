@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 
+//determine the structure of data
 class ProductModel with ChangeNotifier {
   final String productId;
   final String productTitle;

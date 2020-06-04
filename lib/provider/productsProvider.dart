@@ -2,6 +2,7 @@ import 'package:card/model/productModel.dart';
 import 'package:flutter/material.dart';
 
 class ProductProvider with ChangeNotifier {
+  //dummy product model data list
   List<ProductModel> _productList = [
     ProductModel(
       productId: "PID001",
@@ -121,5 +122,21 @@ class ProductProvider with ChangeNotifier {
   //to get details of single product according to product id
   ProductModel findProductById(String _productId) {
     return productsList.firstWhere((prod) => prod.productId == _productId);
+  }
+
+  //created empty list to add data according to query of search products bar
+  final List<ProductModel> _searchList = [];
+
+  //According to query of search products bar it will add products data
+  // temporarily in _searchList only if users query matched with productList
+  // product title
+  List<ProductModel> getSearchedItems(String query) {
+    _searchList.clear(); //it will remove all data from the list
+    productsList.forEach((prod) {
+      if (prod.productTitle.toLowerCase().contains(query.toLowerCase())) {
+        _searchList.add(prod);
+      }
+    });
+    return _searchList; //return search list value
   }
 }
