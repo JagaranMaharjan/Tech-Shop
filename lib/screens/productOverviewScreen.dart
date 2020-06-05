@@ -1,16 +1,38 @@
-import 'package:card/provider/productsProvider.dart';
-import 'package:card/screens/singleProductItemScreen.dart';
-import 'package:card/widgets/productOverviewScreenSearchBtn/searchProductsBar.dart';
+import 'package:card/widgets/productOverviewScreen/productOverviewScreenBody.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
-import 'package:provider/provider.dart';
-import 'package:transparent_image/transparent_image.dart';
 
-class ProductOverviewScreen extends StatelessWidget {
+import 'file:///D:/Courses/shop_app/card/lib/widgets/productOverviewScreen/productOverviewScreenSearchBtn/searchProductsBar.dart';
+
+class ProductOverviewScreen extends StatefulWidget {
   static const String routeName = "/productOverviewScreen";
+
+  @override
+  _ProductOverviewScreenState createState() => _ProductOverviewScreenState();
+}
+
+class _ProductOverviewScreenState extends State<ProductOverviewScreen> {
+  bool _lowToHigh = true;
+  bool _highToLow = false;
+
+  Choice _selectedChoice = choices[0];
+  void _select(Choice choice) {
+    setState(
+      () {
+        _selectedChoice = choice;
+        if (_selectedChoice.title == "High To Low") {
+          _lowToHigh = false;
+          _highToLow = true;
+        } else {
+          _highToLow = false;
+          _lowToHigh = true;
+        }
+        //print(_selectedChoice.title);
+      },
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
-    final _loadedProduct = Provider.of<ProductProvider>(context);
     return Scaffold(
       appBar: AppBar(
         title: Text("Products Screen"),
@@ -31,96 +53,47 @@ class ProductOverviewScreen extends StatelessWidget {
               );
             },
           ),
-        ],
-      ),
-      body: Container(
-        color: Colors.blue[900].withOpacity(0.10),
-        child: Container(
-          margin: EdgeInsets.all(12),
-          child: StaggeredGridView.countBuilder(
-            crossAxisCount: 2,
-            crossAxisSpacing: 12,
-            mainAxisSpacing: 12,
-            itemCount: _loadedProduct.productsList.length,
-            itemBuilder: (context, index) {
-              return InkWell(
-                onTap: () {
-                  Navigator.of(context).pushNamed(
-                    SingleProductItemScreen.routeName,
-                    arguments: _loadedProduct.productsList[index].productId,
+
+          //use of popup menu button widget to manage products according to
+          // price in product overview screen
+          PopupMenuButton(
+            elevation: 3.2,
+            icon: IconButton(
+              icon: Icon(
+                Icons.more_vert,
+                color: Colors.white,
+                size: 25,
+              ),
+            ),
+            onSelected: _select,
+            itemBuilder: (context) {
+              return choices.map(
+                (Choice choice) {
+                  return PopupMenuItem<Choice>(
+                    value: choice,
+                    child: Text(choice.title),
                   );
                 },
-                child: Container(
-                  decoration: BoxDecoration(
-                    color: Colors.transparent,
-                    borderRadius: BorderRadius.circular(15),
-                    border: Border(
-                      top: BorderSide(
-                        color: Colors.grey,
-                        style: BorderStyle.solid,
-                        width: 0.5,
-                      ),
-                      right: BorderSide(
-                        color: Colors.grey,
-                        style: BorderStyle.solid,
-                        width: 0.5,
-                      ),
-                      left: BorderSide(
-                        color: Colors.grey,
-                        style: BorderStyle.solid,
-                        width: 0.5,
-                      ),
-                      bottom: BorderSide(
-                        color: Colors.grey,
-                        style: BorderStyle.solid,
-                        width: 0.5,
-                      ),
-                    ),
-                  ),
-                  child: GridTile(
-                    child: ClipRRect(
-                      borderRadius: BorderRadius.circular(15),
-                      child: FadeInImage.memoryNetwork(
-                        placeholder: kTransparentImage,
-                        image:
-                            _loadedProduct.productsList[index].productImageUrl,
-                        fit: BoxFit.cover,
-                      ),
-                    ),
-                    footer: Container(
-                      decoration: BoxDecoration(
-                        color: Colors.black54,
-                        borderRadius: BorderRadius.only(
-                          bottomRight: Radius.circular(15),
-                          bottomLeft: Radius.circular(15),
-                        ),
-                      ),
-                      height: 50,
-                      width: double.infinity,
-                      child: Center(
-                        child: FittedBox(
-                          fit: BoxFit.fill,
-                          child: Text(
-                            _loadedProduct.productsList[index].productTitle,
-                            style: TextStyle(
-                                color: Colors.white,
-                                letterSpacing: 1,
-                                fontSize: 18,
-                                fontWeight: FontWeight.bold),
-                          ),
-                        ),
-                      ),
-                    ),
-                  ),
-                ),
-              );
-            },
-            staggeredTileBuilder: (index) {
-              return StaggeredTile.count(1, index.isEven ? 1.5 : 1.1);
+              ).toList();
             },
           ),
-        ),
+        ],
+      ),
+      body: ProductOverviewScreenBody(
+        highToLow: _highToLow,
+        lowToHigh: _lowToHigh,
       ),
     );
   }
 }
+
+class Choice {
+  final String title;
+  Choice({this.title});
+}
+
+//created dummy list to display in popup menu button
+List<Choice> choices = <Choice>[
+  Choice(title: "High To Low"),
+  Choice(title: "Low To High"),
+];

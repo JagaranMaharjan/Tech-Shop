@@ -1,5 +1,6 @@
-import 'package:card/widgets/productOverviewScreenSearchBtn/searchResult.dart';
 import 'package:flutter/material.dart';
+
+import 'file:///D:/Courses/shop_app/card/lib/widgets/productOverviewScreen/productOverviewScreenSearchBtn/searchResult.dart';
 
 class SearchProductsBar extends SearchDelegate {
   //theme data method has been override to change app bar color, to change

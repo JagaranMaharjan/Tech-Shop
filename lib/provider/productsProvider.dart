@@ -29,7 +29,7 @@ class ProductProvider with ChangeNotifier {
             "placed."
       ],
       quantity: 50,
-      price: 50000,
+      price: 500,
     ),
     ProductModel(
       productId: "PID002",
@@ -56,7 +56,7 @@ class ProductProvider with ChangeNotifier {
             "placed."
       ],
       quantity: 50,
-      price: 50000,
+      price: 1000,
     ),
     ProductModel(
       productId: "PID003",
@@ -83,7 +83,7 @@ class ProductProvider with ChangeNotifier {
             "placed."
       ],
       quantity: 50,
-      price: 50000,
+      price: 1500,
     ),
     ProductModel(
       productId: "PID004",
@@ -110,7 +110,7 @@ class ProductProvider with ChangeNotifier {
             "placed."
       ],
       quantity: 50,
-      price: 50000,
+      price: 2000,
     ),
   ];
 
@@ -133,10 +133,24 @@ class ProductProvider with ChangeNotifier {
   List<ProductModel> getSearchedItems(String query) {
     _searchList.clear(); //it will remove all data from the list
     productsList.forEach((prod) {
-      if (prod.productTitle.toLowerCase().contains(query.toLowerCase())) {
+      if (prod.productTitle.toLowerCase().startsWith(query.toLowerCase())) {
         _searchList.add(prod);
       }
     });
     return _searchList; //return search list value
+  }
+
+  //this method is used to sort the product list in ascending order according
+  // to price
+  void getListInAscendingOrder() {
+    _productList.sort((a, b) => a.price.compareTo(b.price));
+    // print(_productList);
+  }
+
+  //this method is used to sort product list in descending order according to
+  // price
+  void getListInDescendingOrder() {
+    _productList.sort((b, a) => a.price.compareTo(b.price));
+    // print(_productList);
   }
 }
