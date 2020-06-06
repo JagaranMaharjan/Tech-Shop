@@ -1,3 +1,4 @@
+import 'package:card/screens/filterScreen.dart';
 import 'package:card/screens/singleProductItemScreen.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -19,6 +20,7 @@ class MyApp extends StatelessWidget {
         home: ProductOverviewScreen(),
         routes: {
           SingleProductItemScreen.routeName: (ctx) => SingleProductItemScreen(),
+          FilterScreen.routeName: (ctx) => FilterScreen(),
         },
       ),
     );
