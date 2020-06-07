@@ -54,7 +54,8 @@ class ProductOverviewScreenBody extends StatelessWidget {
                     },
                     child: Container(
                       decoration: BoxDecoration(
-                        color: Colors.transparent,
+                        // color: Colors.transparent,
+                        color: Colors.white.withOpacity(0.4),
                         borderRadius: BorderRadius.circular(15),
                         border: Border(
                           top: BorderSide(

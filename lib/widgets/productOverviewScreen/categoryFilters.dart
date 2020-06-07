@@ -1,3 +1,4 @@
+import 'package:card/screens/categoryOverviewScreen.dart';
 import 'package:flutter/material.dart';
 
 import 'categoryFiltersBtn.dart';
@@ -17,7 +18,9 @@ class CategoryFilters extends StatelessWidget {
           CategoryFiltersBtn(
             icons: Icons.category,
             title: "Category",
-            onTap: () {},
+            onTap: () {
+              Navigator.of(context).pushNamed(CategoryOverviewScreen.routeName);
+            },
           ),
           SizedBox(
             child: Container(
@@ -26,13 +29,6 @@ class CategoryFilters extends StatelessWidget {
               color: Colors.black,
             ),
           ),
-          /*CategoryFiltersBtn(
-            icons: Icons.attach_money,
-            title: "Filters",
-            onTap: () {
-              FiltersDropDownMenu();
-            },
-          ),*/
           FiltersDropDownMenu(),
         ],
       ),

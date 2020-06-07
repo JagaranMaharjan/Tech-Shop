@@ -1,4 +1,5 @@
-import 'package:card/screens/filterScreen.dart';
+import 'package:card/provider/categoryProvider.dart';
+import 'package:card/screens/categoryOverviewScreen.dart';
 import 'package:card/screens/singleProductItemScreen.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -13,16 +14,26 @@ void main() {
 class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return ChangeNotifierProvider.value(
-      value: ProductProvider(),
+    return MultiProvider(
+      providers: [
+        ChangeNotifierProvider.value(
+          value: ProductProvider(),
+        ),
+        ChangeNotifierProvider.value(
+          value: CategoryProvider(),
+        ),
+      ],
       child: MaterialApp(
         title: "Card Design",
         home: ProductOverviewScreen(),
         routes: {
           SingleProductItemScreen.routeName: (ctx) => SingleProductItemScreen(),
-          FilterScreen.routeName: (ctx) => FilterScreen(),
+          CategoryOverviewScreen.routeName: (ctx) => CategoryOverviewScreen(),
         },
       ),
     );
   }
 }
+/*
+
+   * */

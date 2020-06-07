@@ -1,6 +1,4 @@
-import 'package:card/screens/filterScreen.dart';
 import 'package:card/widgets/productOverviewScreen/productOverviewScreenBody.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 import 'file:///D:/Courses/shop_app/card/lib/widgets/productOverviewScreen/productOverviewScreenSearchBtn/searchProductsBar.dart';
@@ -64,9 +62,7 @@ class _ProductOverviewScreenState extends State<ProductOverviewScreen> {
             Container(
               color: Colors.blueGrey.withOpacity(0.1),
               child: ListTile(
-                onTap: () {
-                  Navigator.of(context).pushNamed(FilterScreen.routeName);
-                },
+                onTap: () {},
                 leading: Icon(
                   Icons.settings,
                   size: 25,
