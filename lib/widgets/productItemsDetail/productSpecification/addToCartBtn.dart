@@ -1,44 +1,46 @@
 import 'package:flutter/material.dart';
 
-class AddToCartBtn extends StatefulWidget {
+class AddToCartBtn extends StatelessWidget {
   final Function onTapped;
-  AddToCartBtn({this.onTapped});
-  @override
-  _AddToCartBtnState createState() => _AddToCartBtnState();
-}
+  final IconData icon;
+  final Color iconColor;
+  final String title;
+  final Color containerColor;
+  AddToCartBtn(
+      {this.onTapped,
+      this.iconColor,
+      this.containerColor,
+      this.icon,
+      this.title});
 
-class _AddToCartBtnState extends State<AddToCartBtn> {
   @override
   Widget build(BuildContext context) {
     return InkWell(
-      onTap: widget.onTapped,
+      onTap: onTapped,
       child: Container(
-        margin: EdgeInsets.only(top: 3),
-        width: 180,
+        //alignment: Alignment.bottomCenter,
+        color: containerColor,
+        margin: EdgeInsets.only(top: 0),
+        width: 195,
         height: 50,
-        child: Chip(
-          padding: EdgeInsets.all(10),
-          elevation: 3,
-          backgroundColor: Colors.orange.withOpacity(0.50),
-          shadowColor: Colors.red,
-          clipBehavior: Clip.antiAliasWithSaveLayer,
-          labelStyle: TextStyle(
-            color: Colors.blueGrey,
-            fontSize: 16,
-            letterSpacing: 1,
-            fontWeight: FontWeight.w700,
-          ),
-          label: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceAround,
-            children: <Widget>[
-              Icon(
-                Icons.shopping_cart,
-                size: 25,
-                color: Colors.blueGrey,
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+          children: <Widget>[
+            Icon(
+              icon,
+              size: 25,
+              color: iconColor,
+            ),
+            Text(
+              title,
+              style: TextStyle(
+                color: iconColor,
+                fontSize: 16,
+                letterSpacing: 1,
+                fontWeight: FontWeight.w700,
               ),
-              Text("Add To Cart"),
-            ],
-          ),
+            ),
+          ],
         ),
       ),
     );

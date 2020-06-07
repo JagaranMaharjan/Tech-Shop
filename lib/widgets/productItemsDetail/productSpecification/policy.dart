@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 import '../listTileWithTrailing.dart';
@@ -44,7 +45,7 @@ class _PolicyState extends State<Policy> {
         ),
         if (_returnPolicy)
           ProductExpandMoreContainer(
-            containerHeight: 290,
+            containerHeight: 300,
             child: Container(
               child: Column(
                 children: <Widget>[
@@ -64,6 +65,7 @@ class _PolicyState extends State<Policy> {
                   ),
                   Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
+                    //mainAxisAlignment: MainAxisAlignment.start,
                     children: <Widget>[
                       Text(
                         "Products will be return only :",
@@ -76,9 +78,12 @@ class _PolicyState extends State<Policy> {
                         ),
                       ),
                       Container(
+                        margin: EdgeInsets.only(
+                            top: 0, left: 0, right: 0, bottom: 0),
+                        padding: EdgeInsets.all(0),
                         constraints: BoxConstraints(
-                          maxHeight: 90,
-                          minHeight: 90,
+                          maxHeight: 100,
+                          minHeight: 50,
                           maxWidth: double.infinity,
                           minWidth: double.infinity,
                         ),

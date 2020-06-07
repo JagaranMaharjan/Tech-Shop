@@ -1,4 +1,6 @@
+import 'package:card/provider/cartProvider.dart';
 import 'package:card/provider/categoryProvider.dart';
+import 'package:card/screens/cartScreen.dart';
 import 'package:card/screens/categoryOverviewScreen.dart';
 import 'package:card/screens/singleProductItemScreen.dart';
 import 'package:flutter/material.dart';
@@ -22,6 +24,9 @@ class MyApp extends StatelessWidget {
         ChangeNotifierProvider.value(
           value: CategoryProvider(),
         ),
+        ChangeNotifierProvider.value(
+          value: CartProvider(),
+        ),
       ],
       child: MaterialApp(
         title: "Card Design",
@@ -29,6 +34,7 @@ class MyApp extends StatelessWidget {
         routes: {
           SingleProductItemScreen.routeName: (ctx) => SingleProductItemScreen(),
           CategoryOverviewScreen.routeName: (ctx) => CategoryOverviewScreen(),
+          CartScreen.routeName: (ctx) => CartScreen(),
         },
       ),
     );

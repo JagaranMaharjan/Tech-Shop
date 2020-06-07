@@ -1,4 +1,6 @@
+import 'package:card/provider/cartProvider.dart';
 import 'package:card/provider/productsProvider.dart';
+import 'package:card/widgets/productItemsDetail/cartBadge.dart';
 import 'package:card/widgets/productItemsDetail/draggableScrollableDivider.dart';
 import 'package:card/widgets/productItemsDetail/listTileWithTrailing.dart';
 import 'package:card/widgets/productItemsDetail/productSpecification/addToCartBtn.dart';
@@ -8,25 +10,32 @@ import 'package:card/widgets/productItemsDetail/productSpecification/policy.dart
 import 'package:card/widgets/productItemsDetail/productSpecification/specification.dart';
 import 'package:card/widgets/productItemsDetail/productsMainImage.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/painting.dart';
 import 'package:provider/provider.dart';
 
 class SingleProductItemScreen extends StatelessWidget {
   static const String routeName = "singleProductItemScreen";
+
   @override
   Widget build(BuildContext context) {
     final String _getProductId =
         ModalRoute.of(context).settings.arguments.toString();
     final _getLoadedProduct =
         Provider.of<ProductProvider>(context).findProductById(_getProductId);
+    final _loadProductToCart = Provider.of<CartProvider>(context);
     return Scaffold(
       /*appBar: AppBar(),*/
       body: CustomScrollView(
         slivers: <Widget>[
           SliverAppBar(
+            backgroundColor: Colors.blue,
             expandedHeight: 500,
             floating: true,
             pinned: true,
             //snap: true,
+            actions: <Widget>[
+              CartBadge(),
+            ],
             flexibleSpace: FlexibleSpaceBar(
               title: Text(_getLoadedProduct.productTitle),
               background: ProductsMainImage(
@@ -98,8 +107,34 @@ class SingleProductItemScreen extends StatelessWidget {
                         ),
                         title: "${_getLoadedProduct.price}",
                       ),
-                      DraggableScrollableDivider(),
-                      AddToCartBtn(),
+                      // DraggableScrollableDivider(),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                        children: <Widget>[
+                          AddToCartBtn(
+                            onTapped: () {
+                              _loadProductToCart.addToCart(
+                                  prodId: _getLoadedProduct.productId,
+                                  prodImgUrl: _getLoadedProduct.productImageUrl,
+                                  prodPrice: _getLoadedProduct.price,
+                                  prodTitle: _getLoadedProduct.productTitle,
+                                  prodQuantity: _getLoadedProduct.quantity,
+                                  userId: DateTime.now().toUtc().toString());
+                            },
+                            icon: Icons.shopping_cart,
+                            title: "Add To Cart",
+                            containerColor: Colors.yellow.withOpacity(0.65),
+                            iconColor: Colors.blueGrey,
+                          ),
+                          AddToCartBtn(
+                            onTapped: () {},
+                            icon: Icons.shopping_basket,
+                            title: "Order Now",
+                            containerColor: Colors.orange,
+                            iconColor: Colors.white.withOpacity(0.85),
+                          ),
+                        ],
+                      ),
                     ],
                   ),
                 ),

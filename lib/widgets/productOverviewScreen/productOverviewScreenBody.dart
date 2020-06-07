@@ -52,63 +52,66 @@ class ProductOverviewScreenBody extends StatelessWidget {
                         arguments: _getLoadedProducts[index].productId,
                       );
                     },
-                    child: Container(
-                      decoration: BoxDecoration(
-                        // color: Colors.transparent,
-                        color: Colors.white.withOpacity(0.4),
-                        borderRadius: BorderRadius.circular(15),
-                        border: Border(
-                          top: BorderSide(
-                            color: Colors.grey,
-                            style: BorderStyle.solid,
-                            width: 0.5,
-                          ),
-                          right: BorderSide(
-                            color: Colors.grey,
-                            style: BorderStyle.solid,
-                            width: 0.5,
-                          ),
-                          left: BorderSide(
-                            color: Colors.grey,
-                            style: BorderStyle.solid,
-                            width: 0.5,
-                          ),
-                          bottom: BorderSide(
-                            color: Colors.grey,
-                            style: BorderStyle.solid,
-                            width: 0.5,
-                          ),
-                        ),
-                      ),
-                      child: GridTile(
-                        child: ClipRRect(
+                    child: Hero(
+                      tag: _getLoadedProducts[index].productId,
+                      child: Container(
+                        decoration: BoxDecoration(
+                          // color: Colors.transparent,
+                          color: Colors.white.withOpacity(0.4),
                           borderRadius: BorderRadius.circular(15),
-                          child: FadeInImage.memoryNetwork(
-                            placeholder: kTransparentImage,
-                            image: _getLoadedProducts[index].productImageUrl,
-                            fit: BoxFit.cover,
-                          ),
-                        ),
-                        footer: Container(
-                          decoration: BoxDecoration(
-                            color: Colors.black54,
-                            borderRadius: BorderRadius.only(
-                              bottomRight: Radius.circular(15),
-                              bottomLeft: Radius.circular(15),
+                          border: Border(
+                            top: BorderSide(
+                              color: Colors.grey,
+                              style: BorderStyle.solid,
+                              width: 0.5,
+                            ),
+                            right: BorderSide(
+                              color: Colors.grey,
+                              style: BorderStyle.solid,
+                              width: 0.5,
+                            ),
+                            left: BorderSide(
+                              color: Colors.grey,
+                              style: BorderStyle.solid,
+                              width: 0.5,
+                            ),
+                            bottom: BorderSide(
+                              color: Colors.grey,
+                              style: BorderStyle.solid,
+                              width: 0.5,
                             ),
                           ),
-                          height: 50,
-                          width: double.infinity,
-                          child: Center(
-                            child: FittedBox(
-                              fit: BoxFit.fill,
-                              child: Text(
-                                _getLoadedProducts[index].productTitle,
-                                style: TextStyle(
-                                    color: Colors.white,
-                                    letterSpacing: 1,
-                                    fontSize: 18,
-                                    fontWeight: FontWeight.bold),
+                        ),
+                        child: GridTile(
+                          child: ClipRRect(
+                            borderRadius: BorderRadius.circular(15),
+                            child: FadeInImage.memoryNetwork(
+                              placeholder: kTransparentImage,
+                              image: _getLoadedProducts[index].productImageUrl,
+                              fit: BoxFit.cover,
+                            ),
+                          ),
+                          footer: Container(
+                            decoration: BoxDecoration(
+                              color: Colors.black54,
+                              borderRadius: BorderRadius.only(
+                                bottomRight: Radius.circular(15),
+                                bottomLeft: Radius.circular(15),
+                              ),
+                            ),
+                            height: 50,
+                            width: double.infinity,
+                            child: Center(
+                              child: FittedBox(
+                                fit: BoxFit.fill,
+                                child: Text(
+                                  _getLoadedProducts[index].productTitle,
+                                  style: TextStyle(
+                                      color: Colors.white,
+                                      letterSpacing: 1,
+                                      fontSize: 18,
+                                      fontWeight: FontWeight.bold),
+                                ),
                               ),
                             ),
                           ),
