@@ -450,4 +450,35 @@ class ProductProvider with ChangeNotifier {
     _categoryList.clear();
     notifyListeners();
   }
+
+  List _productId = [];
+
+  List get prodId {
+    return [..._productId];
+  }
+
+  void productsValue() {
+    productId = "";
+    for (int i = 0; i < prodId.length; i++) {
+      productId = prodId[i];
+    }
+    notifyListeners();
+  }
+
+  String productId = "";
+  void getProdId(String prodTitle) {
+    productId = "";
+    _productId.clear();
+    _productList.forEach(
+      (prod) {
+        if (prod.productTitle.toLowerCase() == prodTitle.toLowerCase()) {
+          print("i am from produst provider");
+          print(prod.productId);
+
+          _productId.add(prod.productId);
+        }
+      },
+    );
+    notifyListeners();
+  }
 }

@@ -30,6 +30,7 @@ class CartProvider with ChangeNotifier {
             prodImgUrl: existingProd.prodImgUrl,
             prodId: existingProd.prodId,
             quantity: existingProd.quantity + 1,
+            totalQty: prodQuantity,
           );
         },
       );
@@ -44,6 +45,7 @@ class CartProvider with ChangeNotifier {
             prodTitle: prodTitle,
             userId: userId,
             quantity: 1,
+            totalQty: prodQuantity,
           );
         },
       );
@@ -81,22 +83,26 @@ class CartProvider with ChangeNotifier {
   }
 
   //it will increase user carted products quantity by 1
-  void increaseCartedQuantity(String prodId) {
+  void increaseCartedQuantity(String prodId, int index) {
     if (_cartItems.containsKey(prodId)) {
-      _cartItems.update(
-        prodId,
-        (_existingProd) {
-          return CartModel(
-            userId: _existingProd.userId,
-            prodTitle: _existingProd.prodTitle,
-            prodPrice: _existingProd.prodPrice,
-            prodImgUrl: _existingProd.prodImgUrl,
-            prodId: _existingProd.prodId,
-            quantity: _existingProd.quantity + 1,
-          );
-          //notifyListeners();
-        },
-      );
+      if (_cartItems.values.toList()[index].totalQty >=
+          _cartItems.values.toList()[index].quantity) {
+        _cartItems.update(
+          prodId,
+          (_existingProd) {
+            return CartModel(
+              userId: _existingProd.userId,
+              prodTitle: _existingProd.prodTitle,
+              prodPrice: _existingProd.prodPrice,
+              prodImgUrl: _existingProd.prodImgUrl,
+              prodId: _existingProd.prodId,
+              quantity: _existingProd.quantity + 1,
+            );
+          },
+        );
+      } else {
+        print("out of stock");
+      }
     }
     filterCartedList();
     notifyListeners();

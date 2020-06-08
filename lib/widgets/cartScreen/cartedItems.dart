@@ -4,6 +4,8 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 class CartedItems extends StatelessWidget {
+  final int index;
+  CartedItems({this.index});
   @override
   Widget build(BuildContext context) {
     final _getLoadedCart = Provider.of<CartModel>(context);
@@ -158,7 +160,9 @@ class CartedItems extends StatelessWidget {
                           child: IconButton(
                             onPressed: () {
                               _callMethods.increaseCartedQuantity(
-                                  _getLoadedCart.prodId);
+                                _getLoadedCart.prodId,
+                                index,
+                              );
                             },
                             padding: EdgeInsets.all(2),
                             alignment: Alignment.center,

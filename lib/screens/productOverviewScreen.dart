@@ -1,3 +1,4 @@
+import 'package:card/screens/voiceDemo.dart';
 import 'package:card/widgets/productOverviewScreen/productOverviewScreenBody.dart';
 import 'package:flutter/material.dart';
 
@@ -97,6 +98,22 @@ class _ProductOverviewScreenState extends State<ProductOverviewScreen> {
               showSearch(
                 context: context,
                 delegate: SearchProductsBar(),
+              );
+            },
+          ),
+          //VoiceDemo
+          IconButton(
+            icon: Icon(
+              Icons.mic,
+              color: Colors.white,
+              size: 25,
+            ),
+            onPressed: () {
+              showDialog(
+                context: context,
+                builder: (BuildContext context) {
+                  return VoiceDemo();
+                },
               );
             },
           ),

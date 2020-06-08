@@ -4,6 +4,8 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 class FiltersDropDownMenu extends StatefulWidget {
+  Function showFilter;
+  FiltersDropDownMenu({this.showFilter});
   @override
   _FiltersDropDownMenuState createState() => _FiltersDropDownMenuState();
 }
@@ -26,7 +28,7 @@ class _FiltersDropDownMenuState extends State<FiltersDropDownMenu> {
   @override
   Widget build(BuildContext context) {
     final _filterLoadedProducts =
-        Provider.of<ProductProvider>(context, listen: true);
+        Provider.of<ProductProvider>(context, listen: false);
     return Row(
       children: <Widget>[
         DropdownButton(
@@ -101,6 +103,7 @@ class _FiltersDropDownMenuState extends State<FiltersDropDownMenu> {
                   _filterLoadedProducts.clearFilterList();
                   refreshIndicator = false;
                 }
+                widget.showFilter();
               },
             );
           },

@@ -7,13 +7,14 @@ class CartModel with ChangeNotifier {
   final String prodImgUrl;
   final int quantity;
   final double prodPrice;
+  final int totalQty;
 
-  CartModel({
-    this.userId,
-    this.prodId,
-    this.prodTitle,
-    this.prodImgUrl,
-    this.quantity,
-    this.prodPrice,
-  });
+  CartModel(
+      {this.userId,
+      this.prodId,
+      this.prodTitle,
+      this.prodImgUrl,
+      this.quantity,
+      this.prodPrice,
+      this.totalQty});
 }
