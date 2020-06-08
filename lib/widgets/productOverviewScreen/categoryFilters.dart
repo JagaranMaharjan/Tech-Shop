@@ -6,7 +6,8 @@ import 'filtersDropDown.dart';
 
 class CategoryFilters extends StatelessWidget {
   Function showFilter;
-  CategoryFilters({this.showFilter});
+  Function showAll;
+  CategoryFilters({this.showFilter, this.showAll});
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -33,6 +34,7 @@ class CategoryFilters extends StatelessWidget {
           ),
           FiltersDropDownMenu(
             showFilter: showFilter,
+            showAll: showAll,
           ),
         ],
       ),

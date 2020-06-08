@@ -61,22 +61,28 @@ class CartProvider with ChangeNotifier {
   }
 
   //it will decrease user carted products quantity by 1
-  void decreaseCartedQuantity(String prodId) {
+  void decreaseCartedQuantity(String prodId, int index) {
     if (_cartItems.containsKey(prodId)) {
-      _cartItems.update(
-        prodId,
-        (_existingProd) {
-          return CartModel(
-            userId: _existingProd.userId,
-            prodTitle: _existingProd.prodTitle,
-            prodPrice: _existingProd.prodPrice,
-            prodImgUrl: _existingProd.prodImgUrl,
-            prodId: _existingProd.prodId,
-            quantity: _existingProd.quantity - 1,
-          );
-          //notifyListeners();
-        },
-      );
+      if (_cartItems.values.toList()[index].quantity > 0 &&
+          _cartItems.values.toList()[index].quantity <
+              _cartItems.values.toList()[index].totalQty) {
+        _cartItems.update(
+          prodId,
+          (_existingProd) {
+            return CartModel(
+              userId: _existingProd.userId,
+              prodTitle: _existingProd.prodTitle,
+              prodPrice: _existingProd.prodPrice,
+              prodImgUrl: _existingProd.prodImgUrl,
+              prodId: _existingProd.prodId,
+              quantity: _existingProd.quantity - 1,
+              totalQty: _existingProd.totalQty,
+            );
+          },
+        );
+      } else {
+        print("out of stock");
+      }
     }
     filterCartedList();
     notifyListeners();
@@ -85,8 +91,8 @@ class CartProvider with ChangeNotifier {
   //it will increase user carted products quantity by 1
   void increaseCartedQuantity(String prodId, int index) {
     if (_cartItems.containsKey(prodId)) {
-      if (_cartItems.values.toList()[index].totalQty >=
-          _cartItems.values.toList()[index].quantity) {
+      if (_cartItems.values.toList()[index].quantity <
+          _cartItems.values.toList()[index].totalQty) {
         _cartItems.update(
           prodId,
           (_existingProd) {
@@ -97,6 +103,7 @@ class CartProvider with ChangeNotifier {
               prodImgUrl: _existingProd.prodImgUrl,
               prodId: _existingProd.prodId,
               quantity: _existingProd.quantity + 1,
+              totalQty: _existingProd.totalQty,
             );
           },
         );

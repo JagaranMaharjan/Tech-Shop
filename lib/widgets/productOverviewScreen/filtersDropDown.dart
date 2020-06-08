@@ -5,7 +5,9 @@ import 'package:provider/provider.dart';
 
 class FiltersDropDownMenu extends StatefulWidget {
   Function showFilter;
-  FiltersDropDownMenu({this.showFilter});
+  Function showAll;
+
+  FiltersDropDownMenu({this.showFilter, this.showAll});
   @override
   _FiltersDropDownMenuState createState() => _FiltersDropDownMenuState();
 }
@@ -59,30 +61,35 @@ class _FiltersDropDownMenuState extends State<FiltersDropDownMenu> {
                   _filterLoadedProducts.filterProductsListByPrice(0, 500);
                   if (refreshIndicator == false) {
                     refreshIndicator = !refreshIndicator;
+                    widget.showFilter();
                   }
                 }
                 if (_priceValue == "500 - 1000") {
                   _filterLoadedProducts.filterProductsListByPrice(500, 1000);
                   if (refreshIndicator == false) {
                     refreshIndicator = !refreshIndicator;
+                    widget.showFilter();
                   }
                 }
                 if (_priceValue == "1000 - 5000") {
                   _filterLoadedProducts.filterProductsListByPrice(1000, 5000);
                   if (refreshIndicator == false) {
                     refreshIndicator = !refreshIndicator;
+                    widget.showFilter();
                   }
                 }
                 if (_priceValue == "5000 - 10000") {
                   _filterLoadedProducts.filterProductsListByPrice(5000, 10000);
                   if (refreshIndicator == false) {
                     refreshIndicator = !refreshIndicator;
+                    widget.showFilter();
                   }
                 }
                 if (_priceValue == "10000 - 50000") {
                   _filterLoadedProducts.filterProductsListByPrice(10000, 50000);
                   if (refreshIndicator == false) {
                     refreshIndicator = !refreshIndicator;
+                    widget.showFilter();
                   }
                 }
                 if (_priceValue == "50000 - 100000") {
@@ -90,20 +97,22 @@ class _FiltersDropDownMenuState extends State<FiltersDropDownMenu> {
                       50000, 100000);
                   if (refreshIndicator == false) {
                     refreshIndicator = !refreshIndicator;
+                    widget.showFilter();
                   }
                 }
                 if (_priceValue == "100000 +") {
                   _filterLoadedProducts.filterProductsListByHighPrice(100000);
                   if (refreshIndicator == false) {
                     refreshIndicator = !refreshIndicator;
+                    widget.showFilter();
                   }
                 }
                 if (_priceValue == "Select Price (Rs.)") {
                   _priceValue = hintText;
                   _filterLoadedProducts.clearFilterList();
                   refreshIndicator = false;
+                  widget.showAll();
                 }
-                widget.showFilter();
               },
             );
           },
@@ -126,11 +135,15 @@ class _FiltersDropDownMenuState extends State<FiltersDropDownMenu> {
                   color: Colors.blue,
                 ),
                 onPressed: () {
-                  setState(() {
-                    refreshIndicator = !refreshIndicator;
-                    _priceValue = hintText;
-                    _filterLoadedProducts.clearFilterList();
-                  });
+                  setState(
+                    () {
+                      refreshIndicator = !refreshIndicator;
+                      _priceValue = hintText;
+                      _filterLoadedProducts.clearFilterList();
+                      widget.showAll();
+                      /*_filterLoadedProducts.productsList;  */
+                    },
+                  );
                 },
               ),
             ],

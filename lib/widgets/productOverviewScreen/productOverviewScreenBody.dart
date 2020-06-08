@@ -48,6 +48,12 @@ class _ProductOverviewScreenBodyState extends State<ProductOverviewScreenBody> {
     });
   }
 
+  void showAllProducts() {
+    setState(() {
+      _showFilter = false;
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     // final  _filterProduct = _loadedProduct.filterProductListByPrice;
@@ -62,6 +68,7 @@ class _ProductOverviewScreenBodyState extends State<ProductOverviewScreenBody> {
         children: <Widget>[
           CategoryFilters(
             showFilter: toggleFilters,
+            showAll: showAllProducts,
           ),
           Expanded(
             child: _itemCount == 0
