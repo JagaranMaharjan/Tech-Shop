@@ -20,19 +20,20 @@ class ProductOverviewScreenBody extends StatefulWidget {
 }
 
 class _ProductOverviewScreenBodyState extends State<ProductOverviewScreenBody> {
+  //declaration of variable
   bool _showFilter = false;
   var _getLoadedProducts;
   int _itemCount = 0;
 
+  //show filter methods will display  products details according to price range
+  // selected by users otherwise it will display all products
   void showFilter() {
+    //retrieve value from products provider as an object
     final _loadedProduct = Provider.of<ProductProvider>(context);
-
     //used to sort list
     final _checkedProd = widget.highToLow
         ? Provider.of<ProductProvider>(context).getListInDescendingOrder()
         : Provider.of<ProductProvider>(context).getListInAscendingOrder();
-    //retrieve value from products provider as an object
-
     if (_showFilter) {
       _itemCount = _loadedProduct.filterProductListByPrice.length;
       _getLoadedProducts = _loadedProduct.filterProductListByPrice;
@@ -42,12 +43,16 @@ class _ProductOverviewScreenBodyState extends State<ProductOverviewScreenBody> {
     }
   }
 
+  //if user had selected any price range then it will call this method to
+  // display products by filtering
   void toggleFilters() {
     setState(() {
       _showFilter = true;
     });
   }
 
+  //if user had not selected any price range then it will call this method to
+  // display all products of product list
   void showAllProducts() {
     setState(() {
       _showFilter = false;
@@ -56,12 +61,8 @@ class _ProductOverviewScreenBodyState extends State<ProductOverviewScreenBody> {
 
   @override
   Widget build(BuildContext context) {
-    // final  _filterProduct = _loadedProduct.filterProductListByPrice;
-
+    //filter method was called
     showFilter();
-
-    //print(_loadedProduct.filterProductListByPrice);
-    // print(_loadedProduct.filterProductListByPrice.length);
     return Container(
       color: Colors.blue[900].withOpacity(0.10),
       child: Column(
@@ -72,7 +73,9 @@ class _ProductOverviewScreenBodyState extends State<ProductOverviewScreenBody> {
           ),
           Expanded(
             child: _itemCount == 0
-                ? Center(child: Text("Empty"))
+                ? Center(
+                    child: Text("In Selected Price Category, Products Are Not"
+                        " Available Now !!!"))
                 : Container(
                     margin: EdgeInsets.all(12),
                     child: StaggeredGridView.countBuilder(
@@ -83,7 +86,7 @@ class _ProductOverviewScreenBodyState extends State<ProductOverviewScreenBody> {
                       itemBuilder: (context, index) {
                         return InkWell(
                           onTap: () {
-                            Navigator.of(context).pushNamed(
+                            Navigator.of(context).pushReplacementNamed(
                               SingleProductItemScreen.routeName,
                               arguments: _getLoadedProducts[index].productId,
                             );

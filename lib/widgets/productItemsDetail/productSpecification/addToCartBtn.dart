@@ -21,7 +21,7 @@ class AddToCartBtn extends StatelessWidget {
         //alignment: Alignment.bottomCenter,
         color: containerColor,
         margin: EdgeInsets.only(top: 0),
-        width: 195,
+        width: 130,
         height: 50,
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -31,13 +31,16 @@ class AddToCartBtn extends StatelessWidget {
               size: 25,
               color: iconColor,
             ),
-            Text(
-              title,
-              style: TextStyle(
-                color: iconColor,
-                fontSize: 16,
-                letterSpacing: 1,
-                fontWeight: FontWeight.w700,
+            FittedBox(
+              fit: BoxFit.fill,
+              child: Text(
+                title,
+                style: TextStyle(
+                  color: iconColor,
+                  fontSize: 16,
+                  letterSpacing: 1,
+                  fontWeight: FontWeight.w700,
+                ),
               ),
             ),
           ],

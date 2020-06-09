@@ -1,5 +1,6 @@
 import 'package:card/provider/categoryProvider.dart';
 import 'package:card/provider/productsProvider.dart';
+import 'package:card/screens/productOverviewScreen.dart';
 import 'package:card/widgets/categoryOverviewScreen/categoryListView.dart';
 import 'package:card/widgets/productOverviewScreen/productOverviewScreenSearchBtn/searchProductsBar.dart';
 import 'package:flutter/cupertino.dart';
@@ -54,7 +55,8 @@ class _CategoryOverviewScreenState extends State<CategoryOverviewScreen> {
             ),
             onPressed: () {
               Navigator.of(context).pop();
-              Navigator.of(context).pushReplacementNamed("/");
+              Navigator.of(context)
+                  .pushReplacementNamed(ProductOverviewScreen.routeName);
             },
           ),
         ],

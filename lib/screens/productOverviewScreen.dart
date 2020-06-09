@@ -1,3 +1,6 @@
+import 'package:card/screens/cartScreen.dart';
+import 'package:card/screens/categoryOverviewScreen.dart';
+import 'package:card/screens/orderScreen.dart';
 import 'package:card/screens/voiceDemo.dart';
 import 'package:card/widgets/productOverviewScreen/productOverviewScreenBody.dart';
 import 'package:flutter/material.dart';
@@ -63,20 +66,86 @@ class _ProductOverviewScreenState extends State<ProductOverviewScreen> {
             Container(
               color: Colors.blueGrey.withOpacity(0.1),
               child: ListTile(
-                onTap: () {},
+                onTap: () {
+                  Navigator.of(context)
+                      .pushNamed(CategoryOverviewScreen.routeName);
+                },
                 leading: Icon(
-                  Icons.settings,
+                  Icons.category,
                   size: 25,
                   color: Colors.blueGrey,
                 ),
                 title: Text(
-                  "Filters",
+                  "Category Screen",
                   style: TextStyle(
                     letterSpacing: 1,
                     fontSize: 18,
                     color: Colors.blueGrey,
                   ),
                 ),
+              ),
+            ),
+            SizedBox(
+              child: Container(
+                width: double.infinity,
+                height: 0.5,
+                color: Colors.grey.withOpacity(0.5),
+              ),
+            ),
+            Container(
+              color: Colors.blueGrey.withOpacity(0.1),
+              child: ListTile(
+                onTap: () {
+                  Navigator.of(context).pushNamed(CartScreen.routeName);
+                },
+                leading: Icon(
+                  Icons.shopping_cart,
+                  size: 25,
+                  color: Colors.blueGrey,
+                ),
+                title: Text(
+                  "Cart Screen",
+                  style: TextStyle(
+                    letterSpacing: 1,
+                    fontSize: 18,
+                    color: Colors.blueGrey,
+                  ),
+                ),
+              ),
+            ),
+            SizedBox(
+              child: Container(
+                width: double.infinity,
+                height: 0.5,
+                color: Colors.grey.withOpacity(0.5),
+              ),
+            ),
+            Container(
+              color: Colors.blueGrey.withOpacity(0.1),
+              child: ListTile(
+                onTap: () {
+                  Navigator.of(context).pushNamed(OrderScreen.routeName);
+                },
+                leading: Icon(
+                  Icons.shopping_basket,
+                  size: 25,
+                  color: Colors.blueGrey,
+                ),
+                title: Text(
+                  "Order Screen",
+                  style: TextStyle(
+                    letterSpacing: 1,
+                    fontSize: 18,
+                    color: Colors.blueGrey,
+                  ),
+                ),
+              ),
+            ),
+            SizedBox(
+              child: Container(
+                width: double.infinity,
+                height: 0.5,
+                color: Colors.grey.withOpacity(0.5),
               ),
             ),
           ],
@@ -142,11 +211,9 @@ class _ProductOverviewScreenState extends State<ProductOverviewScreen> {
           ),
         ],
       ),
-      body: SafeArea(
-        child: ProductOverviewScreenBody(
-          highToLow: _highToLow,
-          lowToHigh: _lowToHigh,
-        ),
+      body: ProductOverviewScreenBody(
+        highToLow: _highToLow,
+        lowToHigh: _lowToHigh,
       ),
     );
   }

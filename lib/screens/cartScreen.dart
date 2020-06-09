@@ -1,5 +1,8 @@
 import 'package:card/provider/cartProvider.dart';
+import 'package:card/provider/orderProvider.dart';
+import 'package:card/screens/orderScreen.dart';
 import 'package:card/widgets/cartScreen/cartedItems.dart';
+import 'package:card/widgets/popUpMdenuForAllScreen.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -9,9 +12,13 @@ class CartScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final _getLoadedCart = Provider.of<CartProvider>(context);
+    final _addNewOrder = Provider.of<OrderProvider>(context);
     return Scaffold(
       appBar: AppBar(
         title: Text("Cart Screen"),
+        actions: <Widget>[
+          PopUpMenuForAllScreen(),
+        ],
       ),
       body: Container(
         color: Colors.blue[900].withOpacity(0.1),
@@ -95,7 +102,68 @@ class CartScreen extends StatelessWidget {
                             ),
                           ),
                           InkWell(
-                            onTap: () {},
+                            onTap: () {
+                              showDialog(
+                                context: context,
+                                builder: (context) {
+                                  return AlertDialog(
+                                    title: Text(
+                                      "Are you sure ?",
+                                      style: TextStyle(
+                                        fontSize: 20,
+                                        letterSpacing: 1,
+                                        color: Colors.blueGrey,
+                                      ),
+                                    ),
+                                    actions: <Widget>[
+                                      FlatButton(
+                                        child: Text("No"),
+                                        onPressed: () {
+                                          Navigator.of(context).pop();
+                                        },
+                                      ),
+                                      FlatButton(
+                                        child: Text("Yes"),
+                                        onPressed: () {
+                                          if (_getLoadedCart.cartedItemsCount !=
+                                              0) {
+                                            _addNewOrder.addNewOrders(
+                                              cartModelList: _getLoadedCart
+                                                  .cartedList.values
+                                                  .toList(),
+                                              totalAmount:
+                                                  _getLoadedCart.totalAmount,
+                                            );
+                                            //print(_addNewOrder.orderList);
+                                            _getLoadedCart.clearCartedList();
+                                            Navigator.of(context).pop();
+                                            Navigator.of(context)
+                                                .pushReplacementNamed(
+                                                    OrderScreen.routeName);
+                                          }
+                                        },
+                                      ),
+                                    ],
+                                    content: Container(
+                                      padding: EdgeInsets.all(0),
+                                      margin: EdgeInsets.all(0),
+                                      width: double.infinity,
+                                      height: 40,
+                                      child: Text(
+                                        "Do you want to order carted products"
+                                        " ?",
+                                        textAlign: TextAlign.justify,
+                                        style: TextStyle(
+                                          fontSize: 16,
+                                          letterSpacing: 1,
+                                          color: Colors.blueGrey,
+                                        ),
+                                      ),
+                                    ),
+                                  );
+                                },
+                              );
+                            },
                             child: Chip(
                               padding: EdgeInsets.all(5),
                               elevation: 3,

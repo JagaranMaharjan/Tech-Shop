@@ -10,7 +10,7 @@ class CartBadge extends StatelessWidget {
         Provider.of<CartProvider>(context).cartedItemsCount;
     return IconButton(
       onPressed: () {
-        Navigator.of(context).pushNamed(CartScreen.routeName);
+        Navigator.of(context).pushReplacementNamed(CartScreen.routeName);
       },
       icon: Container(
         child: Stack(

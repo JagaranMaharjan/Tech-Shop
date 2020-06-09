@@ -64,7 +64,7 @@ class CartProvider with ChangeNotifier {
   void decreaseCartedQuantity(String prodId, int index) {
     if (_cartItems.containsKey(prodId)) {
       if (_cartItems.values.toList()[index].quantity > 0 &&
-          _cartItems.values.toList()[index].quantity <
+          _cartItems.values.toList()[index].quantity <=
               _cartItems.values.toList()[index].totalQty) {
         _cartItems.update(
           prodId,
@@ -138,5 +138,17 @@ class CartProvider with ChangeNotifier {
       _totalAmount += (value.quantity * value.prodPrice);
     });
     return _totalAmount;
+  }
+
+  //this method will clear carted list
+  void clearCartedList() {
+    _cartItems.clear();
+    notifyListeners();
+  }
+
+  //this method will remove single items from carted list according to prodId
+  void removeItemsByProdId(String prodId) {
+    _cartItems.remove(prodId);
+    notifyListeners();
   }
 }

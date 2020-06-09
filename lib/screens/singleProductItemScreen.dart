@@ -1,8 +1,10 @@
 import 'package:card/provider/cartProvider.dart';
 import 'package:card/provider/productsProvider.dart';
+import 'package:card/widgets/popUpMdenuForAllScreen.dart';
 import 'package:card/widgets/productItemsDetail/cartBadge.dart';
 import 'package:card/widgets/productItemsDetail/draggableScrollableDivider.dart';
 import 'package:card/widgets/productItemsDetail/listTileWithTrailing.dart';
+import 'package:card/widgets/productItemsDetail/orderNowAlertBox.dart';
 import 'package:card/widgets/productItemsDetail/productSpecification/addToCartBtn.dart';
 import 'package:card/widgets/productItemsDetail/productSpecification/delivery.dart';
 import 'package:card/widgets/productItemsDetail/productSpecification/modelNumber.dart';
@@ -15,7 +17,7 @@ import 'package:provider/provider.dart';
 
 class SingleProductItemScreen extends StatelessWidget {
   static const String routeName = "singleProductItemScreen";
-
+  final GlobalKey<ScaffoldState> _scaffold = new GlobalKey<ScaffoldState>();
   @override
   Widget build(BuildContext context) {
     final String _getProductId =
@@ -23,7 +25,9 @@ class SingleProductItemScreen extends StatelessWidget {
     final _getLoadedProduct =
         Provider.of<ProductProvider>(context).findProductById(_getProductId);
     final _loadProductToCart = Provider.of<CartProvider>(context);
+
     return Scaffold(
+      key: _scaffold,
       /*appBar: AppBar(),*/
       body: CustomScrollView(
         slivers: <Widget>[
@@ -35,6 +39,7 @@ class SingleProductItemScreen extends StatelessWidget {
             //snap: true,
             actions: <Widget>[
               CartBadge(),
+              PopUpMenuForAllScreen(),
             ],
             flexibleSpace: FlexibleSpaceBar(
               title: Text(_getLoadedProduct.productTitle),
@@ -112,14 +117,46 @@ class SingleProductItemScreen extends StatelessWidget {
                         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                         children: <Widget>[
                           AddToCartBtn(
+                            onTapped: () {},
+                            icon: Icons.message,
+                            title: "Msg",
+                            containerColor: Colors.white.withOpacity(0.65),
+                            iconColor: Colors.blueGrey,
+                          ),
+                          AddToCartBtn(
                             onTapped: () {
+                              //added user carted products in cart list
                               _loadProductToCart.addToCart(
-                                  prodId: _getLoadedProduct.productId,
-                                  prodImgUrl: _getLoadedProduct.productImageUrl,
-                                  prodPrice: _getLoadedProduct.price,
-                                  prodTitle: _getLoadedProduct.productTitle,
-                                  prodQuantity: _getLoadedProduct.quantity,
-                                  userId: DateTime.now().toUtc().toString());
+                                prodId: _getLoadedProduct.productId,
+                                prodImgUrl: _getLoadedProduct.productImageUrl,
+                                prodPrice: _getLoadedProduct.price,
+                                prodTitle: _getLoadedProduct.productTitle,
+                                prodQuantity: _getLoadedProduct.quantity,
+                                userId: DateTime.now().toUtc().toString(),
+                              );
+                              _scaffold.currentState.removeCurrentSnackBar();
+                              _scaffold.currentState.showSnackBar(
+                                SnackBar(
+                                  backgroundColor: Colors.blue,
+                                  content: Text(
+                                    "You have added ${_getLoadedProduct.productTitle.toLowerCase()} to cart "
+                                    "items.",
+                                    style: TextStyle(
+                                      fontSize: 16,
+                                      letterSpacing: 1,
+                                    ),
+                                  ),
+                                  duration: Duration(milliseconds: 500),
+                                  action: SnackBarAction(
+                                    label: "UNDO",
+                                    textColor: Colors.yellow,
+                                    onPressed: () {
+                                      _loadProductToCart.removeItemsByProdId(
+                                          _getLoadedProduct.productId);
+                                    },
+                                  ),
+                                ),
+                              );
                             },
                             icon: Icons.shopping_cart,
                             title: "Add To Cart",
@@ -127,7 +164,25 @@ class SingleProductItemScreen extends StatelessWidget {
                             iconColor: Colors.blueGrey,
                           ),
                           AddToCartBtn(
-                            onTapped: () {},
+                            onTapped: () {
+                              showDialog(
+                                context: context,
+                                builder: (context) {
+                                  _loadProductToCart.addToCart(
+                                    prodId: _getLoadedProduct.productId,
+                                    prodImgUrl:
+                                        _getLoadedProduct.productImageUrl,
+                                    prodPrice: _getLoadedProduct.price,
+                                    prodTitle: _getLoadedProduct.productTitle,
+                                    prodQuantity: _getLoadedProduct.quantity,
+                                    userId: DateTime.now().toUtc().toString(),
+                                  );
+                                  return OrderNowAlertDialog(
+                                    prodId: _getLoadedProduct.productId,
+                                  );
+                                },
+                              );
+                            },
                             icon: Icons.shopping_basket,
                             title: "Order Now",
                             containerColor: Colors.orange,
