@@ -11,6 +11,7 @@ import 'package:provider/provider.dart';
 
 import 'provider/orderProvider.dart';
 import 'provider/productsProvider.dart';
+import 'screens/addNewProduct.dart';
 
 void main() {
   runApp(MyApp());
@@ -44,6 +45,7 @@ class MyApp extends StatelessWidget {
           CartScreen.routeName: (ctx) => CartScreen(),
           VoiceDemo.routeName: (ctx) => VoiceDemo(),
           OrderScreen.routeName: (ctx) => OrderScreen(),
+          AddNewProduct.routeName: (ctx) => AddNewProduct(),
         },
       ),
     );

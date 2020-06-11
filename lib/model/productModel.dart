@@ -28,5 +28,13 @@ class ProductModel with ChangeNotifier {
     this.refundPolicy,
     this.quantity,
     this.price,
+    this.isFavorite,
   });
+
+  void isToggleFavorite() {
+    isFavorite = !isFavorite;
+    notifyListeners();
+    print("i am from proudct model");
+    print(isFavorite);
+  }
 }

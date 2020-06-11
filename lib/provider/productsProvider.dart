@@ -30,8 +30,10 @@ class ProductProvider with ChangeNotifier {
       ],
       quantity: 50,
       price: 500,
+      isFavorite: false,
     ),
     ProductModel(
+      isFavorite: false,
       productId: "PID002",
       productTitle: "Headphone",
       productImageUrl:
@@ -59,6 +61,7 @@ class ProductProvider with ChangeNotifier {
       price: 1500,
     ),
     ProductModel(
+      isFavorite: false,
       productId: "PID003",
       productTitle: "Earphone",
       productImageUrl:
@@ -86,6 +89,7 @@ class ProductProvider with ChangeNotifier {
       price: 1300,
     ),
     ProductModel(
+      isFavorite: false,
       productId: "PID004",
       productTitle: "HP Laptop",
       productImageUrl:
@@ -113,6 +117,7 @@ class ProductProvider with ChangeNotifier {
       price: 200000,
     ),
     ProductModel(
+      isFavorite: false,
       productId: "PID005",
       productTitle: "Samsung TV",
       productImageUrl:
@@ -140,6 +145,7 @@ class ProductProvider with ChangeNotifier {
       price: 50000,
     ),
     ProductModel(
+      isFavorite: false,
       productId: "PID006",
       productTitle: "HITACHI TV",
       productImageUrl:
@@ -167,6 +173,7 @@ class ProductProvider with ChangeNotifier {
       price: 45000,
     ),
     ProductModel(
+      isFavorite: false,
       productId: "PID007",
       productTitle: "Elment TV",
       productImageUrl:
@@ -194,6 +201,7 @@ class ProductProvider with ChangeNotifier {
       price: 25000,
     ),
     ProductModel(
+      isFavorite: false,
       productId: "PID008",
       productTitle: "Nokia",
       productImageUrl:
@@ -221,6 +229,7 @@ class ProductProvider with ChangeNotifier {
       price: 50000,
     ),
     ProductModel(
+      isFavorite: false,
       productId: "PID009",
       productTitle: "Samsung Lite",
       productImageUrl:
@@ -248,6 +257,7 @@ class ProductProvider with ChangeNotifier {
       price: 70000,
     ),
     ProductModel(
+      isFavorite: false,
       productId: "PID010",
       productTitle: "Mac Book",
       productImageUrl:
@@ -275,6 +285,7 @@ class ProductProvider with ChangeNotifier {
       price: 170000,
     ),
     ProductModel(
+      isFavorite: false,
       productId: "PID011",
       productTitle: "Dell Desktop",
       productImageUrl:
@@ -302,6 +313,7 @@ class ProductProvider with ChangeNotifier {
       price: 70000,
     ),
     ProductModel(
+      isFavorite: false,
       productId: "PID012",
       productTitle: "Lenovo Laptop",
       productImageUrl:
@@ -332,6 +344,7 @@ class ProductProvider with ChangeNotifier {
 
   //getter method to get the list of products
   List<ProductModel> get productsList {
+    //notifyListeners();
     return [..._productList];
   }
 

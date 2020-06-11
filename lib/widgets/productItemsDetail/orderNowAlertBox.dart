@@ -6,7 +6,9 @@ import 'package:provider/provider.dart';
 
 class OrderNowAlertDialog extends StatefulWidget {
   final String prodId;
-  OrderNowAlertDialog({this.prodId});
+  final int prodQty;
+  OrderNowAlertDialog({this.prodId, this.prodQty});
+
   @override
   _OrderNowAlertDialogState createState() => _OrderNowAlertDialogState();
 }
@@ -15,6 +17,7 @@ class _OrderNowAlertDialogState extends State<OrderNowAlertDialog> {
   int _qty = 1;
   @override
   Widget build(BuildContext context) {
+    //print(widget.prodQty);
     final _updateCartedQty = Provider.of<CartProvider>(context);
     final _addToOrderList = Provider.of<OrderProvider>(context);
     return AlertDialog(
@@ -112,7 +115,7 @@ class _OrderNowAlertDialogState extends State<OrderNowAlertDialog> {
                     elevation: 3,
                     child: IconButton(
                       onPressed: () {
-                        if (_qty > 0) {
+                        if (_qty > 0 && _qty < widget.prodQty) {
                           _updateCartedQty.increaseCartedQuantity(
                               widget.prodId, 0);
                           setState(

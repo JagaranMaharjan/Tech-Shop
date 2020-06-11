@@ -29,7 +29,7 @@ class _ProductOverviewScreenBodyState extends State<ProductOverviewScreenBody> {
   // selected by users otherwise it will display all products
   void showFilter() {
     //retrieve value from products provider as an object
-    final _loadedProduct = Provider.of<ProductProvider>(context);
+    final _loadedProduct = Provider.of<ProductProvider>(context, listen: true);
     //used to sort list
     final _checkedProd = widget.highToLow
         ? Provider.of<ProductProvider>(context).getListInDescendingOrder()

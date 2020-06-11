@@ -1,3 +1,4 @@
+import 'package:card/screens/addNewProduct.dart';
 import 'package:card/screens/cartScreen.dart';
 import 'package:card/screens/categoryOverviewScreen.dart';
 import 'package:card/screens/orderScreen.dart';
@@ -133,6 +134,34 @@ class _ProductOverviewScreenState extends State<ProductOverviewScreen> {
                 ),
                 title: Text(
                   "Order Screen",
+                  style: TextStyle(
+                    letterSpacing: 1,
+                    fontSize: 18,
+                    color: Colors.blueGrey,
+                  ),
+                ),
+              ),
+            ),
+            SizedBox(
+              child: Container(
+                width: double.infinity,
+                height: 0.5,
+                color: Colors.grey.withOpacity(0.5),
+              ),
+            ),
+            Container(
+              color: Colors.blueGrey.withOpacity(0.1),
+              child: ListTile(
+                onTap: () {
+                  Navigator.of(context).pushNamed(AddNewProduct.routeName);
+                },
+                leading: Icon(
+                  Icons.shopping_basket,
+                  size: 25,
+                  color: Colors.blueGrey,
+                ),
+                title: Text(
+                  "Manage Product",
                   style: TextStyle(
                     letterSpacing: 1,
                     fontSize: 18,

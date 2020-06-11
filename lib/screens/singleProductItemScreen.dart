@@ -23,12 +23,12 @@ class SingleProductItemScreen extends StatelessWidget {
     final String _getProductId =
         ModalRoute.of(context).settings.arguments.toString();
     final _getLoadedProduct =
-        Provider.of<ProductProvider>(context).findProductById(_getProductId);
+        Provider.of<ProductProvider>(context, listen: true)
+            .findProductById(_getProductId);
     final _loadProductToCart = Provider.of<CartProvider>(context);
 
     return Scaffold(
       key: _scaffold,
-      /*appBar: AppBar(),*/
       body: CustomScrollView(
         slivers: <Widget>[
           SliverAppBar(
@@ -71,7 +71,11 @@ class SingleProductItemScreen extends StatelessWidget {
 
                     //  mainAxisAlignment: MainAxisAlignment.center,
                     children: <Widget>[
-                      ModelNumber(modelNumber: _getLoadedProduct.modelNo),
+                      ModelNumber(
+                        modelNumber: _getLoadedProduct.modelNo,
+                        favToggleFunction: _getLoadedProduct.isToggleFavorite,
+                        isFavorite: _getLoadedProduct.isFavorite,
+                      ),
                       DraggableScrollableDivider(),
                       Specification(
                         title1: "Brand",
@@ -165,20 +169,20 @@ class SingleProductItemScreen extends StatelessWidget {
                           ),
                           AddToCartBtn(
                             onTapped: () {
+                              _loadProductToCart.addToCart(
+                                prodId: _getLoadedProduct.productId,
+                                prodImgUrl: _getLoadedProduct.productImageUrl,
+                                prodPrice: _getLoadedProduct.price,
+                                prodTitle: _getLoadedProduct.productTitle,
+                                prodQuantity: _getLoadedProduct.quantity,
+                                userId: DateTime.now().toUtc().toString(),
+                              );
                               showDialog(
                                 context: context,
                                 builder: (context) {
-                                  _loadProductToCart.addToCart(
-                                    prodId: _getLoadedProduct.productId,
-                                    prodImgUrl:
-                                        _getLoadedProduct.productImageUrl,
-                                    prodPrice: _getLoadedProduct.price,
-                                    prodTitle: _getLoadedProduct.productTitle,
-                                    prodQuantity: _getLoadedProduct.quantity,
-                                    userId: DateTime.now().toUtc().toString(),
-                                  );
                                   return OrderNowAlertDialog(
                                     prodId: _getLoadedProduct.productId,
+                                    prodQty: _getLoadedProduct.quantity,
                                   );
                                 },
                               );
