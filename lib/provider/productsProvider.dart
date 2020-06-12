@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 class ProductProvider with ChangeNotifier {
   //dummy product model data list
   List<ProductModel> _productList = [
-    ProductModel(
+    /*ProductModel(
       productId: "PID001",
       productTitle: "Watch",
       productImageUrl:
@@ -339,7 +339,7 @@ class ProductProvider with ChangeNotifier {
       ],
       quantity: 50,
       price: 50000,
-    ),
+    ),   */
   ];
 
   //getter method to get the list of products
@@ -493,5 +493,15 @@ class ProductProvider with ChangeNotifier {
       },
     );
     notifyListeners();
+  }
+
+  //to add new product
+  void addNewProduct({ProductModel productModel}) {
+    _productList.add(productModel);
+    notifyListeners();
+    print("add to list");
+    _productList.forEach((prod) {
+      print(prod);
+    });
   }
 }

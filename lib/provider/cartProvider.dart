@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:card/model/cartModel.dart';
 import 'package:flutter/material.dart';
 
@@ -13,7 +15,7 @@ class CartProvider with ChangeNotifier {
     String userId,
     String prodId,
     String prodTitle,
-    String prodImgUrl,
+    File prodImgUrl,
     int prodQuantity,
     double prodPrice,
   }) {

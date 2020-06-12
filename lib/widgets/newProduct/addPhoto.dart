@@ -2,8 +2,12 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:path/path.dart' as path;
+import 'package:path_provider/path_provider.dart' as inInternalStorage;
 
 class AddPhoto extends StatefulWidget {
+  Function image;
+  AddPhoto({this.image});
   @override
   _AddPhotoState createState() => _AddPhotoState();
 }
@@ -16,6 +20,12 @@ class _AddPhotoState extends State<AddPhoto> {
     setState(() {
       _image = File(pickedImage.path);
     });
+    final appDir = await inInternalStorage.getApplicationDocumentsDirectory();
+    final fileName = path.basename(pickedImage.path);
+    final saveImage = await _image.copy('${appDir.path}/$fileName');
+    widget.image(saveImage);
+    print("user loaded camera image");
+    print(widget.image);
   }
 
   @override

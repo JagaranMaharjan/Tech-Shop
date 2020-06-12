@@ -20,11 +20,14 @@ class CartedItems extends StatelessWidget {
         height: 100,
         child: Row(
           children: <Widget>[
-            Image.network(
+            /*Image.network(
               _getLoadedCart.prodImgUrl,
               height: 100,
               width: 100,
               fit: BoxFit.cover,
+            ),*/
+            CircleAvatar(
+              backgroundImage: FileImage(_getLoadedCart.prodImgUrl),
             ),
             SizedBox(
               width: 5,

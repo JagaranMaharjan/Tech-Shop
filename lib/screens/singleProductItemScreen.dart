@@ -7,7 +7,6 @@ import 'package:card/widgets/productItemsDetail/listTileWithTrailing.dart';
 import 'package:card/widgets/productItemsDetail/orderNowAlertBox.dart';
 import 'package:card/widgets/productItemsDetail/productSpecification/addToCartBtn.dart';
 import 'package:card/widgets/productItemsDetail/productSpecification/delivery.dart';
-import 'package:card/widgets/productItemsDetail/productSpecification/modelNumber.dart';
 import 'package:card/widgets/productItemsDetail/productSpecification/policy.dart';
 import 'package:card/widgets/productItemsDetail/productSpecification/specification.dart';
 import 'package:card/widgets/productItemsDetail/productsMainImage.dart';
@@ -18,12 +17,13 @@ import 'package:provider/provider.dart';
 class SingleProductItemScreen extends StatelessWidget {
   static const String routeName = "singleProductItemScreen";
   final GlobalKey<ScaffoldState> _scaffold = new GlobalKey<ScaffoldState>();
+
   @override
   Widget build(BuildContext context) {
     final String _getProductId =
         ModalRoute.of(context).settings.arguments.toString();
     final _getLoadedProduct =
-        Provider.of<ProductProvider>(context, listen: true)
+        Provider.of<ProductProvider>(context, listen: false)
             .findProductById(_getProductId);
     final _loadProductToCart = Provider.of<CartProvider>(context);
 
@@ -68,14 +68,22 @@ class SingleProductItemScreen extends StatelessWidget {
                   padding: EdgeInsets.all(0),
                   child: Column(
                     mainAxisSize: MainAxisSize.min,
-
                     //  mainAxisAlignment: MainAxisAlignment.center,
                     children: <Widget>[
-                      ModelNumber(
-                        modelNumber: _getLoadedProduct.modelNo,
-                        favToggleFunction: _getLoadedProduct.isToggleFavorite,
-                        isFavorite: _getLoadedProduct.isFavorite,
-                      ),
+                      /*Consumer<ProductProvider>(
+                        builder: (_, prodModel, child) {
+                          return IconButton(
+                            icon: prodModel
+                                    .findProductById(_getProductId)
+                                    .isFavorite
+                                ? Icon(Icons.favorite)
+                                : Icon(Icons.favorite_border),
+                            onPressed: () => prodModel
+                                .findProductById(_getProductId)
+                                .isToggleFavorite(),
+                          );
+                        },
+                      ),*/
                       DraggableScrollableDivider(),
                       Specification(
                         title1: "Brand",

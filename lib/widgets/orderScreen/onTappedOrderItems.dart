@@ -33,11 +33,15 @@ class OnTappedOrderItems extends StatelessWidget {
                     height: 100,
                     child: Row(
                       children: <Widget>[
-                        Image.network(
+                        /*Image.network(
                           cartModelList[index].prodImgUrl,
                           height: 80,
                           width: 80,
                           fit: BoxFit.cover,
+                        ),*/
+                        CircleAvatar(
+                          backgroundImage:
+                              FileImage(cartModelList[index].prodImgUrl),
                         ),
                         SizedBox(
                           width: 5,

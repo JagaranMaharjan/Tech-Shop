@@ -1,10 +1,12 @@
+import 'dart:io';
+
 import 'package:flutter/cupertino.dart';
 
 //determine the structure of data
 class ProductModel with ChangeNotifier {
   final String productId;
   final String productTitle;
-  final String productImageUrl;
+  final File productImageUrl;
   final String modelNo;
   final String brandName;
   final String productCategory;
@@ -34,7 +36,5 @@ class ProductModel with ChangeNotifier {
   void isToggleFavorite() {
     isFavorite = !isFavorite;
     notifyListeners();
-    print("i am from proudct model");
-    print(isFavorite);
   }
 }

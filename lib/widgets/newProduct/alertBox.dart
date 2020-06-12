@@ -11,6 +11,7 @@ class AlertBox extends StatefulWidget {
 
 class _AlertBoxState extends State<AlertBox> {
   TextEditingController _newPolicy = new TextEditingController();
+  String _initialValue = "";
   @override
   void initState() {
     super.initState();
@@ -63,38 +64,97 @@ class _AlertBoxState extends State<AlertBox> {
           children: <Widget>[
             if (widget.policyList.length != 0)
               Container(
-                margin: EdgeInsets.all(5),
-                width: double.infinity,
                 height: 100,
+                width: 250,
+                margin: EdgeInsets.all(5),
                 decoration: BoxDecoration(
-                  border: Border(
-                    right: BorderSide(
-                      style: BorderStyle.solid,
-                      width: 0.5,
-                      color: Colors.grey,
-                    ),
-                    top: BorderSide(
-                      style: BorderStyle.solid,
-                      width: 0.5,
-                      color: Colors.grey,
-                    ),
-                    bottom: BorderSide(
-                      style: BorderStyle.solid,
-                      width: 0.5,
-                      color: Colors.grey,
-                    ),
-                    left: BorderSide(
-                      style: BorderStyle.solid,
-                      width: 0.5,
-                      color: Colors.grey,
-                    ),
+                  border: Border.all(
+                    color: Colors.grey,
+                    width: 0.5,
+                    style: BorderStyle.solid,
                   ),
                 ),
-                /*child: ListView.builder(
-                    itemCount: widget.policyList.length,
-                    itemBuilder: (ctx, index) {
-                      return Text(widget.policyList[index]);
-                    }),*/
+                child: ListView.builder(
+                  itemCount: widget.policyList.length,
+                  itemBuilder: (ctx, index) {
+                    return Container(
+                      padding: EdgeInsets.all(5),
+                      //color: Colors.redAccent,
+                      width: 230,
+                      height: 70,
+                      alignment: Alignment.centerLeft,
+                      child: Column(
+                        children: <Widget>[
+                          FittedBox(
+                            child: Text(
+                              widget.policyList[index],
+                              textAlign: TextAlign.justify,
+                              style: TextStyle(
+                                fontSize: 14,
+                              ),
+                            ),
+                          ),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.end,
+                            crossAxisAlignment: CrossAxisAlignment.end,
+                            children: <Widget>[
+                              FlatButton.icon(
+                                label: Text(
+                                  "Edit",
+                                  style: TextStyle(
+                                    color: Colors.blueGrey,
+                                    fontSize: 12,
+                                  ),
+                                ),
+                                icon: Icon(
+                                  Icons.edit,
+                                  size: 12,
+                                  color: Colors.blueGrey,
+                                ),
+                                padding: EdgeInsets.all(0),
+                                materialTapTargetSize:
+                                    MaterialTapTargetSize.shrinkWrap,
+                                onPressed: () {
+                                  setState(
+                                    () {
+                                      _newPolicy.text =
+                                          widget.policyList[index].toString();
+                                      widget.policyList
+                                          .remove(widget.policyList[index]);
+                                    },
+                                  );
+                                },
+                              ),
+                              FlatButton.icon(
+                                label: Text(
+                                  "Delete",
+                                  style: TextStyle(
+                                      color: Colors.redAccent, fontSize: 12),
+                                ),
+                                icon: Icon(
+                                  Icons.delete,
+                                  size: 12,
+                                  color: Colors.redAccent,
+                                ),
+                                padding: EdgeInsets.all(0),
+                                materialTapTargetSize:
+                                    MaterialTapTargetSize.shrinkWrap,
+                                onPressed: () {
+                                  setState(
+                                    () {
+                                      widget.policyList
+                                          .remove(widget.policyList[index]);
+                                    },
+                                  );
+                                },
+                              ),
+                            ],
+                          ),
+                        ],
+                      ),
+                    );
+                  },
+                ),
               ),
             TextFormField(
               controller: _newPolicy,

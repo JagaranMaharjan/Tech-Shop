@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:card/provider/productsProvider.dart';
 import 'package:card/screens/singleProductItemScreen.dart';
 import 'package:flutter/material.dart';
@@ -61,12 +63,16 @@ class CategoryListView extends StatelessWidget {
               ),
               child: Stack(
                 children: <Widget>[
-                  Image.network(
+                  CircleAvatar(
+                    backgroundImage: FileImage(
+                        File(_loadedValue[index].productImageUrl.toString())),
+                  ),
+                  /*Image.network(
                     _loadedValue[index].productImageUrl,
                     width: double.infinity,
                     height: double.infinity,
                     fit: BoxFit.cover,
-                  ),
+                  ),*/
                   Positioned(
                     bottom: 0,
                     left: 0,

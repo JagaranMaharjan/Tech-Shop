@@ -1,10 +1,12 @@
+import 'dart:io';
+
 import 'package:flutter/cupertino.dart';
 
 class CartModel with ChangeNotifier {
   final String userId;
   final String prodId;
   final String prodTitle;
-  final String prodImgUrl;
+  final File prodImgUrl;
   final int quantity;
   final double prodPrice;
   final int totalQty;

@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:card/model/productModel.dart';
 import 'package:card/provider/productsProvider.dart';
 import 'package:card/screens/singleProductItemScreen.dart';
@@ -70,14 +72,18 @@ class SearchResult extends StatelessWidget {
                     margin: EdgeInsets.all(0),
                     padding: EdgeInsets.all(0),
                     child: ListTile(
-                        leading: Container(
+                        leading: CircleAvatar(
+                          backgroundImage: FileImage(
+                              File(_result[index].productImageUrl.toString())),
+                        ),
+                        /*Container(
                           child: Image.network(
                             _result[index].productImageUrl,
                             fit: BoxFit.fill,
                             height: 50,
                             width: 50,
                           ),
-                        ),
+                        ),*/
                         title: RichText(
                           text: TextSpan(
                             text: _result[index]

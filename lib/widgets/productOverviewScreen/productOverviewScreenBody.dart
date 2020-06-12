@@ -6,7 +6,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:provider/provider.dart';
-import 'package:transparent_image/transparent_image.dart';
 
 class ProductOverviewScreenBody extends StatefulWidget {
   final bool highToLow;
@@ -63,6 +62,7 @@ class _ProductOverviewScreenBodyState extends State<ProductOverviewScreenBody> {
   Widget build(BuildContext context) {
     //filter method was called
     showFilter();
+
     return Container(
       color: Colors.blue[900].withOpacity(0.10),
       child: Column(
@@ -84,9 +84,13 @@ class _ProductOverviewScreenBodyState extends State<ProductOverviewScreenBody> {
                       mainAxisSpacing: 12,
                       itemCount: _itemCount,
                       itemBuilder: (context, index) {
+                        //
+                        print("from overviwe");
+                        print(_getLoadedProducts[index].productId);
+                        print(_getLoadedProducts[index].productImageUrl);
                         return InkWell(
                           onTap: () {
-                            Navigator.of(context).pushReplacementNamed(
+                            Navigator.of(context).pushNamed(
                               SingleProductItemScreen.routeName,
                               arguments: _getLoadedProducts[index].productId,
                             );
@@ -122,7 +126,12 @@ class _ProductOverviewScreenBodyState extends State<ProductOverviewScreenBody> {
                                 ),
                               ),
                               child: GridTile(
-                                child: ClipRRect(
+                                child: CircleAvatar(
+                                  backgroundImage: FileImage(
+                                      _getLoadedProducts[index]
+                                          .productImageUrl),
+                                ),
+                                /*ClipRRect(
                                   borderRadius: BorderRadius.circular(15),
                                   child: FadeInImage.memoryNetwork(
                                     placeholder: kTransparentImage,
@@ -130,7 +139,7 @@ class _ProductOverviewScreenBodyState extends State<ProductOverviewScreenBody> {
                                         .productImageUrl,
                                     fit: BoxFit.cover,
                                   ),
-                                ),
+                                ),*/
                                 footer: Container(
                                   decoration: BoxDecoration(
                                     color: Colors.black54,
